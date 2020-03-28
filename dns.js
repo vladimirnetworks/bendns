@@ -4,7 +4,7 @@ var http = require('http');
 
 
 
-ip = "192.168.1.16";
+ip = "127.0.0.1";
 port = 53;
 
  
