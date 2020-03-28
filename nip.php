@@ -1,16 +1,19 @@
 <?php
 
-error_reporting(false);
-ini_set('display_errors',0);
-
-
 $domb =  str_replace("^",".",strrev(base64_decode(str_replace("REHAlEMInTheBOx","=",strrev($_GET['v'])))));
 
+$kele = gethostbyname($domb);
 
-#$domb = 'google.com';
-$nb = file_get_contents("http://dig.jsondns.org/IN/$domb/A");
+$kelex = explode(".",$kele);
 
-$nb = json_decode($nb,true);
+if (count($kelex) > 3) {
+echo gethostbyname($domb);
+} else {
 
-echo $nb['answer'][0]['rdata'];
+echo "127.0.0.1";
+
+}
+
+exit;
+
 ?>
