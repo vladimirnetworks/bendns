@@ -44,9 +44,10 @@ var request = http.request(options, function (hres) {
     });
     hres.on('end', function () {
 		
-        console.log("ip : "+datav);
+       
 		
-	try {	
+	try {
+ console.log("ip : "+datav);		
 res.answer.push({name:hostname, type:'A', data:datav+"", 'ttl':ttl})
 res.end()
   } catch (e) {
