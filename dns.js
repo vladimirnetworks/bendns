@@ -1,19 +1,16 @@
 var dnsd = require('dnsd');
 var http = require('http');
 
-function reverse(s){
-	 
-    return ((new Buffer(s.split("").reverse().join("").replace(/\./g, "^")).toString('base64')).replace(/=/g, "REHAlEMInTheBOx")).split("").reverse().join("")
-}
 
 
 
-
+ip = "192.168.1.16";
+port = 53;
 
  
 var server = dnsd.createServer(handler)
-server.zone('example.com', 'ns1.example.com', 'us@example.com', 'now', '2h', '30m', '2w', '10m').listen(53, '127.0.0.1')
-console.log('runed')
+server.zone().listen(port , ip)
+console.log('bendns started on '+ip+":"+port)
  
 function handler(req, res) {
 	
@@ -30,16 +27,11 @@ function handler(req, res) {
  
   if(question.type == 'A') {
 	  
-	  if (req.question[0].name == 'dig.jsondns.org') {
-		  
-		  res.answer.push({name:hostname, type:'A', data:"104.27.143.146", 'ttl':ttl})
-		  res.end()
-		  
-	  } else {
+
 	  
-	  /**/
+
 	  
-	   console.log("req2 : "+req.question[0].name+" -> "+reverse(req.question[0].name));
+	   console.log("req for  : "+req.question[0].name+" -> "+reverse(req.question[0].name));
 	  
 	  var options = {
     host: 'xobeh.scienceontheweb.net',
@@ -52,7 +44,7 @@ var request = http.request(options, function (hres) {
     });
     hres.on('end', function () {
 		
-        console.log("res2 : "+datav);
+        console.log("ip : "+datav);
 		
 	try {	
 res.answer.push({name:hostname, type:'A', data:datav+"", 'ttl':ttl})
@@ -70,11 +62,17 @@ request.on('error', function (e) {
 
 });
 request.end();
-  }
+
 
   }
 
  
 
   
+}
+
+
+function reverse(s){
+	 
+    return ((new Buffer.from(s.split("").reverse().join("").replace(/\./g, "^")).toString('base64')).replace(/=/g, "REHAlEMInTheBOx")).split("").reverse().join("")
 }
