@@ -1,13 +1,13 @@
 <?php
 
-$domb =  str_replace("^",".",strrev(base64_decode(str_replace("REHAlEMInTheBOx","=",strrev($_GET['v'])))));
+$req =  str_replace("^",".",strrev(base64_decode(str_replace("REHAlEMInTheBOx","=",strrev($_GET['v'])))));
 
-$kele = gethostbyname($domb);
+$resip = gethostbyname($req);
 
-$kelex = explode(".",$kele);
+$resipx = explode(".",$resip);
 
-if (count($kelex) > 3) {
-echo gethostbyname($domb);
+if (count($resipx) > 3) {
+echo $resip;
 } else {
 
 echo "127.0.0.1";
